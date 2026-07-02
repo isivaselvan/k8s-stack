@@ -11,6 +11,7 @@ provider "kubernetes" "this" {
   config {
     config_path    = "~/.kube/config"
     config_context = "rancher-desktop"
+    insecure       = true
   }
 }
 
