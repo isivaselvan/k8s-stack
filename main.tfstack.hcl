@@ -4,16 +4,18 @@ required_providers {
     version = "~> 2.35"
   }
 }
+
 variable "namespace" { type = string }
-variable "kube_config_raw" { type = string }
 
 provider "kubernetes" "this" {
   config {
-    raw_config = var.kube_config_raw
+    config_path    = "~/.kube/config"
+    config_context = "rancher-desktop"
   }
 }
+
 component "ns" {
-  source = "./k8s"
-  inputs = { name = var.namespace }
+  source    = "./k8s"
+  inputs    = { name = var.namespace }
   providers = { kubernetes = provider.kubernetes.this }
 }
